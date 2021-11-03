@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Damageable : MonoBehaviour
+public class Damageable : ElementOverhead
 {
-    [SerializeField] public enum Team {Player, Enemy};
-    [SerializeField] public Team _team;
+    public enum Team { Player, Enemy };
+    public Team _team;
+    [SerializeField] private Element _resistance;
 
-    [SerializeField] public float health = 100f;
+    protected float health = 100f;
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Element incoming)
     {
+        if (_resistance != Element.Gray && _resistance == incoming)
+        {
+            damage *= 0.25f;
+        }
+
         health -= damage;
 
         if (health <= 0)

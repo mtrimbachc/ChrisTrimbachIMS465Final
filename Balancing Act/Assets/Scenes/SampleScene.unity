@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 51058617}
   - component: {fileID: 51058616}
   - component: {fileID: 51058615}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,7 +473,7 @@ GameObject:
   - component: {fileID: 354026824}
   - component: {fileID: 354026823}
   - component: {fileID: 354026822}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,8 +831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
-  element: 2
-  owner: {fileID: 0}
+  _element: 2
   persistent: 1
 --- !u!212 &806332653
 SpriteRenderer:
@@ -1025,7 +1024,7 @@ GameObject:
   - component: {fileID: 1241102799}
   - component: {fileID: 1241102798}
   - component: {fileID: 1241102797}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1191,8 +1190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  element: 0
-  owner: {fileID: 0}
+  _element: 2
   persistent: 1
 --- !u!212 &1344953219
 SpriteRenderer:
@@ -1284,7 +1282,7 @@ GameObject:
   - component: {fileID: 1440887372}
   - component: {fileID: 1440887371}
   - component: {fileID: 1440887370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1476,8 +1474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  element: 1
-  owner: {fileID: 0}
+  _element: 2
   persistent: 1
 --- !u!212 &1972929986
 SpriteRenderer:
@@ -1632,16 +1629,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _team: 0
-  health: 100
+  _resistance: 0
+  lightBuildUp: 0
+  darkBuildUp: 0
   moveSpeed: 320
   meleeCDTime: 0.3
+  magic1CDTime: 1.5
+  magic2CDTime: 2
+  magic3CDTime: 5
   meleeTime: 0.2
+  meleeBuildUp: 5
+  magic1BuildUp: 10
+  magic2BuildUp: 15
+  magic3BuildUp: 10
   innerPlayer: {fileID: 297298670}
   cursor: {fileID: 637860932}
   meleeAttacks:
   - {fileID: 1344953216}
   - {fileID: 1972929982}
   - {fileID: 806332649}
+  magic1Attacks:
+  - {fileID: 438046337516612868, guid: c0d5acfae911ac9418adc6d9e6f9e15f, type: 3}
+  - {fileID: 1730265942097972864, guid: fd9816194852eb8418b783f775a41937, type: 3}
+  - {fileID: 7179870752294731259, guid: f1dc32b3b0ef2774688889f44a89e1db, type: 3}
+  magic2Attacks:
+  - {fileID: 62459884082497021, guid: ed92b79f8a8a19e44b388a6f87de4ace, type: 3}
+  - {fileID: 2677350108513550887, guid: 05a4021e1451d7342a110fce2fa1f027, type: 3}
+  - {fileID: 5667772782233890182, guid: 38059270b998ba545ae1a3daec006de6, type: 3}
 --- !u!58 &2090776646
 CircleCollider2D:
   m_ObjectHideFlags: 0

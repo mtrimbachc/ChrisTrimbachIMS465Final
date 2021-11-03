@@ -2,15 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageSource : MonoBehaviour
+public class DamageSource : ElementOverhead
 {
-    [SerializeField] public float damage = 0f;
+    [SerializeField] private float damage = 0f;
+    protected float generalDamageMod = 1f;
+    protected float lightDamageMod = 1f;
+    protected float darkDamageMod = 1f;
 
-    [SerializeField] public enum Element {light, dark, gray };
-    [SerializeField] public Element element = Element.gray;
+    [SerializeField] private Element _element = Element.Gray;
 
-    [SerializeField] public GameObject owner = null;
-    [SerializeField] public bool persistent = false;
+    protected GameObject owner = null;
+    [SerializeField] private bool persistent = false;
+
+    public void setModifiers(float general, float light, float dark)
+    {
+        generalDamageMod = general;
+        lightDamageMod = light;
+        darkDamageMod = dark;
+    }
+
+    public void setOwner(GameObject owner)
+    {
+        this.owner = owner;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,9 +32,21 @@ public class DamageSource : MonoBehaviour
         {
             Damageable other = collision.GetComponent<Damageable>();
 
+            float tempDamage = damage;
+
             if (other._team != owner.GetComponent<Damageable>()._team)
             {
-                other.TakeDamage(damage);
+                switch(_element)
+                {
+                    case Element.Light:
+                        tempDamage *= lightDamageMod;
+                        break;
+                    case Element.Dark:
+                        tempDamage *= darkDamageMod;
+                        break;
+                }
+
+                other.TakeDamage(tempDamage * generalDamageMod, _element);
 
                 if (!persistent)
                 {
@@ -28,5 +54,12 @@ public class DamageSource : MonoBehaviour
                 }
             }
         } 
+        else if (collision.gameObject != owner && collision.gameObject.layer == 6)
+        {
+            if (!persistent)
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 }
