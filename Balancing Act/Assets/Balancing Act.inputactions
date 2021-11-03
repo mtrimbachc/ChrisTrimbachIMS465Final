@@ -23,33 +23,41 @@
                 },
                 {
                     "name": "Melee",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "9d724b86-51a9-409a-89cc-441349c95fb1",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
                 {
                     "name": "Magic1",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "d7b8552f-1ece-432b-99cb-49c27c4a6a05",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
                 {
                     "name": "Magic2",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "c46aa0df-ec62-427d-a4f6-c033ebea439a",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
                 {
                     "name": "Magic3",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "a34e502e-32f0-40b0-ab65-3259e20ad37e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SwapElement",
+                    "type": "Value",
+                    "id": "47f137ab-d92d-499e-98aa-8b3eeeaa90c8",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 }
@@ -470,6 +478,61 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Magic3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4a97d709-e03b-4436-9e3f-8c2899b6e45d",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SwapElement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e5baaa23-3f48-42aa-80f7-6370840c9f95",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "SwapElement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c3ff3d3-37a1-41d5-97eb-d81164a5cbbb",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SwapElement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5af17a83-2aaf-4205-a54f-ec308f64d49e",
+                    "path": "<SwitchProControllerHID>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SwapElement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0ce1047-0e41-4141-aefb-a511e85be773",
+                    "path": "<DualShockGamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SwapElement",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
