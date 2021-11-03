@@ -8,7 +8,7 @@ public class Player : Damageable
     public enum Element { Light, Dark, Gray};
     private Element _selectedElement;
 
-    private CharacterController controller = null;
+    private Rigidbody2D RB = null;
     private PlayerInput PI = null;
     private Camera mainCamera = null;
 
@@ -32,13 +32,20 @@ public class Player : Damageable
 
         _selectedElement = Element.Light;
 
-        controller = this.GetComponent<CharacterController>();
+        RB = this.GetComponent<Rigidbody2D>();
         PI = this.GetComponent<PlayerInput>();
         mainCamera = this.GetComponentInChildren<Camera>();
+
+        RB.freezeRotation = true;
     }
 
     // Update is called once per frame
     void Update()
+    {
+        
+    }
+
+    private void FixedUpdate()
     {
         Movement();
     }
@@ -58,7 +65,7 @@ public class Player : Damageable
     {
         Vector2 velocity = new Vector2(horizontal, vertical).normalized;
 
-        controller.Move(velocity * moveSpeed * Time.deltaTime);
+        RB.velocity = velocity * moveSpeed * Time.fixedDeltaTime;
     }
 
     public void OnLook(InputValue value)
@@ -69,6 +76,8 @@ public class Player : Damageable
         if (PI.currentControlScheme == "Keyboard&Mouse")
         {
             newLook = mainCamera.ScreenToWorldPoint(input);
+            newLook.z = this.transform.position.z;
+            newLook = Vector3.Normalize(newLook - this.transform.position);
         }
         else
         {
