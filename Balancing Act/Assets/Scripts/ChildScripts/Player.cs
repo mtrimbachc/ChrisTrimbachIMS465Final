@@ -5,11 +5,12 @@ using UnityEngine.InputSystem;
 
 public class Player : Damageable
 {
-    //public enum Element { Light, Dark, Gray};
     private Element _selectedElement;
+    private Element _unbalanced = Element.Gray;
 
     private Rigidbody2D RB = null;
     private PlayerInput PI = null;
+    private UIManager UI = null;
     private Camera mainCamera = null;
 
     private float horizontal = 0;
@@ -53,6 +54,7 @@ public class Player : Damageable
 
         RB = this.GetComponent<Rigidbody2D>();
         PI = this.GetComponent<PlayerInput>();
+        UI = GameObject.Find("Canvas").GetComponent<UIManager>();
         mainCamera = this.GetComponentInChildren<Camera>();
 
         RB.freezeRotation = true;
@@ -249,6 +251,9 @@ public class Player : Damageable
 
     public void OnSwapElement(InputValue value)
     {
+        if (_selectedElement == Element.Gray)
+            return;
+
         if (value.Get<float>() == 0)
         {
             if (_selectedElement == Element.Light)
@@ -265,6 +270,23 @@ public class Player : Damageable
         }
     }
 
+    public void OnEnterGray()
+    {
+        if (lightBuildUp != 100 || darkBuildUp != 100)
+            return;
+
+        _selectedElement = Element.Gray;
+        _unbalanced = Element.Gray;
+
+        lightBuildUp = 0;
+        darkBuildUp = 0;
+        grayBuildUp = 100;
+
+        UI.UpdateGauges(lightBuildUp, Element.Light);
+        UI.UpdateGauges(darkBuildUp, Element.Dark);
+        UI.UpdateGauges(grayBuildUp, Element.Gray);
+    }
+
     public void BuildUpGauge(int buildUp, Element element)
     {
         switch (element)
@@ -274,18 +296,28 @@ public class Player : Damageable
 
                 if (lightBuildUp > 100)
                     lightBuildUp = 100;
+
+                UI.UpdateGauges(lightBuildUp, element);
                 break;
             case Element.Dark:
                 darkBuildUp += buildUp;
 
                 if (darkBuildUp > 100)
                     darkBuildUp = 100;
+
+                UI.UpdateGauges(darkBuildUp, element);
                 break;
             case Element.Gray:
                 grayBuildUp -= (int) (buildUp * 1.5);
 
                 if (grayBuildUp < 0)
+                {
                     grayBuildUp = 0;
+
+                    _selectedElement = Element.Light;
+                }
+
+                UI.UpdateGauges(grayBuildUp, element);
                 break;
         }
     }
