@@ -58,6 +58,9 @@ public class Player : Damageable
         mainCamera = this.GetComponentInChildren<Camera>();
 
         RB.freezeRotation = true;
+
+        for (int i = 0; i < meleeAttacks.Length; i++)
+            meleeAttacks[i].GetComponent<DamageSource>().setOwner(this.gameObject);
     }
 
     // Update is called once per frame
@@ -285,30 +288,64 @@ public class Player : Damageable
         UI.UpdateGauges(lightBuildUp, Element.Light);
         UI.UpdateGauges(darkBuildUp, Element.Dark);
         UI.UpdateGauges(grayBuildUp, Element.Gray);
+        UI.UpdateUnbalanced(_unbalanced);
     }
 
     public void BuildUpGauge(int buildUp, Element element)
     {
+        float buildUpMod = 1f;
+
+        if (_unbalanced != Element.Gray && _unbalanced != element)
+            buildUpMod = 0.2f;
+
         switch (element)
         {
             case Element.Light:
-                lightBuildUp += buildUp;
+                lightBuildUp += (int)(buildUp * buildUpMod);
 
                 if (lightBuildUp > 100)
                     lightBuildUp = 100;
 
+                if (_unbalanced == Element.Gray && lightBuildUp - darkBuildUp > 30)
+                {
+                    _unbalanced = Element.Light;
+                    darkDamageMod = 0.5f;
+                }
+
+                if (_unbalanced == Element.Dark && lightBuildUp - darkBuildUp >= 0)
+                {
+                    _unbalanced = Element.Gray;
+                    lightDamageMod = 1f;
+                    darkDamageMod = 1f;
+                }
+
                 UI.UpdateGauges(lightBuildUp, element);
                 break;
             case Element.Dark:
-                darkBuildUp += buildUp;
+                darkBuildUp += (int)(buildUp * buildUpMod); ;
 
                 if (darkBuildUp > 100)
                     darkBuildUp = 100;
 
+                if (_unbalanced == Element.Gray && darkBuildUp - lightBuildUp > 30)
+                {
+                    _unbalanced = Element.Dark;
+                    lightDamageMod = 0.5f;
+                }
+
+                if (_unbalanced == Element.Light && darkBuildUp - lightBuildUp >= 0) 
+                {
+                    _unbalanced = Element.Gray;
+                    lightDamageMod = 1f;
+                    darkDamageMod = 1f;
+                }
+
                 UI.UpdateGauges(darkBuildUp, element);
                 break;
             case Element.Gray:
-                grayBuildUp -= (int) (buildUp * 1.5);
+                buildUpMod = 1.5f;
+
+                grayBuildUp -= (int)(buildUp * buildUpMod);
 
                 if (grayBuildUp < 0)
                 {
@@ -320,6 +357,8 @@ public class Player : Damageable
                 UI.UpdateGauges(grayBuildUp, element);
                 break;
         }
+
+        UI.UpdateUnbalanced(_unbalanced);
     }
 
     private void OnDeath()

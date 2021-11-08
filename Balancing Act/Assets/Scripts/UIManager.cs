@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : ElementOverhead
 {
     [SerializeField] private Image[] elementGauges;
+    [SerializeField] private Image[] unbalancedGauges;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,26 @@ public class UIManager : ElementOverhead
             {
                 elementGauges[changedElement].rectTransform.localScale = new Vector3((value / 100f), 1, 1);
             }
+        }
+    }
+
+    public void UpdateUnbalanced(Element unbalanced)
+    {
+        switch(unbalanced)
+        {
+            case Element.Light:
+                unbalancedGauges[0].gameObject.SetActive(true);
+
+                break;
+            case Element.Dark:
+                unbalancedGauges[1].gameObject.SetActive(true);
+
+                break;
+            case Element.Gray:
+                unbalancedGauges[0].gameObject.SetActive(false);
+                unbalancedGauges[1].gameObject.SetActive(false);
+
+                break;
         }
     }
 }

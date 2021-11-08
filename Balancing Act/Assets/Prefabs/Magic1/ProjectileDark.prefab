@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  _element: 2
+  _element: 1
   persistent: 0
   moveSpeed: 540
 --- !u!58 &1730265942097972866

@@ -9,7 +9,7 @@ public class DamageSource : ElementOverhead
     protected float lightDamageMod = 1f;
     protected float darkDamageMod = 1f;
 
-    [SerializeField] private Element _element = Element.Gray;
+    [SerializeField] protected Element _element;
 
     protected GameObject owner = null;
     [SerializeField] private bool persistent = false;
