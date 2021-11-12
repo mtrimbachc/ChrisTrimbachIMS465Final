@@ -24,6 +24,9 @@ public class Damageable : ElementOverhead
         health -= damage;
         Debug.Log(health);
 
+        if (this.GetComponent<Player>() != null)
+            this.GetComponent<Player>().UpdateHealth();
+
         if (health <= 0)
         {
             OnDeath();

@@ -21,14 +21,19 @@ public class Player : Damageable
     private bool magic2CD = false;
     private bool magic3CD = false;
     private bool unbalanced = false;
-    [SerializeField] private int lightBuildUp = 0;
-    [SerializeField] private int darkBuildUp = 0;
+    private bool darkBuff = false;
+    private bool grayBuff = false;
+    private int lightBuildUp = 0;
+    private int darkBuildUp = 0;
     private int grayBuildUp = 0;
-    private float generalDamageMod = 1f;
-    private float lightDamageMod = 1f;
-    private float darkDamageMod = 1f;
+    [SerializeField] private float generalDamageMod = 1f;
+    [SerializeField] private float lightDamageMod = 1f;
+    [SerializeField] private float darkDamageMod = 1f;
 
+    [SerializeField] private float healthMax = 100;
     [SerializeField] private float moveSpeed = 8f;
+    [SerializeField] private float darkBuffAmount = 0.25f;
+    [SerializeField] private float grayBuffAmount = 0.4f;
     [SerializeField] private float meleeCDTime = 1f;
     [SerializeField] private float magic1CDTime = 1.5f;
     [SerializeField] private float magic2CDTime = 2f;
@@ -48,7 +53,7 @@ public class Player : Damageable
     void Start()
     {
         _team = Team.Player;
-        health = 100;
+        health = healthMax;
 
         _selectedElement = Element.Light;
 
@@ -249,7 +254,74 @@ public class Player : Damageable
 
     public void OnMagic3()
     {
+        if (magic3CD)
+            return;
+        
+        switch(_selectedElement)
+        {
+            case Element.Light:
+                health += 20;
 
+                if (health > healthMax)
+                    health = healthMax;
+
+                UpdateHealth();
+
+                break;
+            case Element.Dark:
+                health -= 10;
+
+                if (health < 1)
+                    health = 1;
+
+                UpdateHealth();
+
+                generalDamageMod += darkBuffAmount;
+                darkBuff = true;
+                StartCoroutine(DarkDamageBuff());
+                break;
+            case Element.Gray:
+                health += 10;
+
+                if (health > healthMax)
+                    health = healthMax;
+
+                UpdateHealth();
+
+                generalDamageMod += grayBuffAmount;
+                grayBuff = true;
+                StartCoroutine(GrayDamageBuff());
+                break;
+        }
+
+        magic3CD = true;
+
+        BuildUpGauge(magic3BuildUp, _selectedElement);
+
+        StartCoroutine(Magic3CoolDown());
+    }
+
+    private IEnumerator DarkDamageBuff()
+    {
+        yield return new WaitForSeconds(magic3CDTime / 2.0f);
+
+        generalDamageMod -= darkBuffAmount;
+        darkBuff = false;
+    }
+
+    private IEnumerator GrayDamageBuff()
+    {
+        yield return new WaitForSeconds(magic3CDTime / 1.5f);
+
+        generalDamageMod -= grayBuffAmount;
+        grayBuff = false;
+    }
+
+    private IEnumerator Magic3CoolDown()
+    {
+        yield return new WaitForSeconds(magic3CDTime);
+
+        magic3CD = false;
     }
 
     public void OnSwapElement(InputValue value)
@@ -284,6 +356,14 @@ public class Player : Damageable
         lightBuildUp = 0;
         darkBuildUp = 0;
         grayBuildUp = 100;
+
+        StopCoroutine(Magic1CoolDown());
+        StopCoroutine(Magic2CoolDown());
+        StopCoroutine(Magic3CoolDown());
+
+        magic1CD = false;
+        magic2CD = false;
+        magic3CD = false;
 
         UI.UpdateGauges(lightBuildUp, Element.Light);
         UI.UpdateGauges(darkBuildUp, Element.Dark);
@@ -359,6 +439,11 @@ public class Player : Damageable
         }
 
         UI.UpdateUnbalanced(_unbalanced);
+    }
+
+    public void UpdateHealth()
+    {
+        UI.UpdateHealth(health, healthMax);
     }
 
     private void OnDeath()

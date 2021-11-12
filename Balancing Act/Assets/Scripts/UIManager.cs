@@ -7,6 +7,7 @@ public class UIManager : ElementOverhead
 {
     [SerializeField] private Image[] elementGauges;
     [SerializeField] private Image[] unbalancedGauges;
+    [SerializeField] private Image healthGauge;
 
     // Start is called before the first frame update
     void Start()
@@ -63,5 +64,10 @@ public class UIManager : ElementOverhead
 
                 break;
         }
+    }
+
+    public void UpdateHealth(float current, float max)
+    {
+        healthGauge.fillAmount = current / max;
     }
 }
