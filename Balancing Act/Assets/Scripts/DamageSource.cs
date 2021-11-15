@@ -10,6 +10,7 @@ public class DamageSource : ElementOverhead
     protected float darkDamageMod = 1f;
 
     [SerializeField] protected Element _element;
+    [SerializeField] protected Team _team;
 
     protected GameObject owner = null;
     [SerializeField] private bool persistent = false;
@@ -24,6 +25,11 @@ public class DamageSource : ElementOverhead
     public void setOwner(GameObject owner)
     {
         this.owner = owner;
+
+        if (owner.GetComponent<Player>() != null)
+            this._team = Team.Player;
+        else
+            this._team = Team.Enemy;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -36,7 +42,7 @@ public class DamageSource : ElementOverhead
 
             //Debug.Log(this.owner);
 
-            if (other._team != owner.GetComponent<Damageable>()._team)
+            if (other._team != this._team)
             {
                 switch(_element)
                 {

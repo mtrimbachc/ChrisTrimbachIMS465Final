@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Damageable : ElementOverhead
-{
-    public enum Team { Player, Enemy };
+{ 
     public Team _team;
     [SerializeField] private Element _resistance;
 

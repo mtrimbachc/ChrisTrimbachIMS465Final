@@ -8,4 +8,7 @@ public class ElementOverhead : MonoBehaviour
     // them all to communicate with each other rather than have several different Enums
 
     public enum Element {Light, Dark, Gray};
+
+    // Same cas for the Team Enum
+    public enum Team { Player, Enemy };
 }
