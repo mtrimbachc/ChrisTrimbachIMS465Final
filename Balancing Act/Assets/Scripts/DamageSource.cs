@@ -34,6 +34,8 @@ public class DamageSource : ElementOverhead
 
             float tempDamage = damage;
 
+            //Debug.Log(this.owner);
+
             if (other._team != owner.GetComponent<Damageable>()._team)
             {
                 switch(_element)

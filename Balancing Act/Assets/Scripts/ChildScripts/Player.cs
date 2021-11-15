@@ -144,6 +144,7 @@ public class Player : Damageable
         if (currentAttack != -1 && !meleeAttacks[currentAttack].activeSelf)
         {
             meleeAttacks[currentAttack].SetActive(true);
+            meleeAttacks[currentAttack].GetComponent<BoxCollider2D>().enabled = true;
             meleeAttacks[currentAttack].GetComponent<DamageSource>().setModifiers(generalDamageMod, lightDamageMod, darkDamageMod);
             meleeCD = true;
 
@@ -158,6 +159,7 @@ public class Player : Damageable
     {
         yield return new WaitForSeconds(meleeTime);
 
+        meleeAttacks[attack].GetComponent<BoxCollider2D>().enabled = false;
         meleeAttacks[attack].SetActive(false);
     }
 
@@ -446,10 +448,10 @@ public class Player : Damageable
         UI.UpdateHealth(health, healthMax);
     }
 
-    private void OnDeath()
+    public void OnDeath()
     {
-        // This is an override of the parent OnDeath method
-
-        Debug.Log("The Player has died");
+        // Double check health to make sure the call is valid
+        if (health <= 0)
+            Debug.Log("The Player has died");
     }
 }

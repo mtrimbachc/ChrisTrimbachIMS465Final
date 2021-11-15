@@ -13,29 +13,27 @@ public class Damageable : ElementOverhead
 
     public void TakeDamage(float damage, Element incoming)
     {
-        Debug.Log("Hit by: " + incoming);
+        //Debug.Log("Hit by: " + incoming);
 
         if (_resistance != Element.Gray && _resistance == incoming)
         {
             damage *= 0.25f;
-            Debug.Log("Resisted");
+            //Debug.Log("Resisted");
         }
 
         health -= damage;
-        Debug.Log(health);
+        //Debug.Log(health);
 
-        if (this.GetComponent<Player>() != null)
+        if (this is Player)
             this.GetComponent<Player>().UpdateHealth();
 
         if (health <= 0)
         {
-            OnDeath();
-        }
-    }
+            if (this is Player)
+                this.GetComponent<Player>().OnDeath();
 
-    private void OnDeath()
-    {
-        if (_team == Team.Enemy)
-            Destroy(this.gameObject);
+            if (this is Enemy)
+                this.GetComponent<Enemy>().OnDeath();
+        }
     }
 }
