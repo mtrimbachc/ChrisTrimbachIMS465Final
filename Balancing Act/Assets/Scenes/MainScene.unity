@@ -1336,6 +1336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 15
   _element: 2
+  _team: 0
   persistent: 1
 --- !u!212 &806332653
 SpriteRenderer:
@@ -1600,7 +1601,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3123826906570216457, guid: 5f87667993cad1747be1cc7f8530554d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3123826906570216457, guid: 5f87667993cad1747be1cc7f8530554d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1657,7 +1658,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6963630651018230272, guid: 240081e64d2e13045bd7ca69b15cd43a, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6963630651018230272, guid: 240081e64d2e13045bd7ca69b15cd43a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1884,6 +1885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   _element: 0
+  _team: 0
   persistent: 1
 --- !u!212 &1344953219
 SpriteRenderer:
@@ -2183,7 +2185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2761704455513717447, guid: 2301bf141c9b2604e9cf3e63275697cb, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2761704455513717447, guid: 2301bf141c9b2604e9cf3e63275697cb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2516,6 +2518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   _element: 1
+  _team: 0
   persistent: 1
 --- !u!212 &1972929986
 SpriteRenderer:
