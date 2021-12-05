@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : DamageSource
 {
-    [SerializeField] private float moveSpeed = 480f;
+    public float moveSpeed = 480f;
     protected Rigidbody2D RB = null;
 
     private void Start()
@@ -15,5 +15,25 @@ public class Projectile : DamageSource
     private void FixedUpdate()
     {
         RB.velocity = this.transform.up * moveSpeed * Time.fixedDeltaTime;
+    }
+
+    public IEnumerator Despawn(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        Despawn();
+    }
+
+    public void Despawn()
+    {
+        if (owner != null)
+        {
+            moveSpeed = 0f;
+            RB.velocity = Vector2.zero;
+            this.transform.position = owner.transform.position;
+            this.gameObject.SetActive(false);
+        }
+        else
+            Destroy(this.gameObject);
     }
 }

@@ -22,6 +22,8 @@ public class Enemy : Damageable
     [SerializeField] private GameObject meleeAttack = null;
     [SerializeField] private GameObject rangedAttack = null;
 
+    private Queue<GameObject> projectiles = null;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +36,19 @@ public class Enemy : Damageable
 
         if (meleeAttack != null)
             meleeAttack.GetComponent<DamageSource>().setOwner(this.gameObject);
+
+        if (rangedAttack != null)
+        {
+            projectiles = new Queue<GameObject>();
+
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject temp = Instantiate(rangedAttack, transform.position, transform.rotation);
+                temp.GetComponent<DamageSource>().setOwner(this.gameObject);
+                temp.SetActive(false);
+                projectiles.Enqueue(temp);
+            }
+        }
     }
     void FixedUpdate()
     {
@@ -85,8 +100,14 @@ public class Enemy : Damageable
             if (rangedCD)
                 return;
 
-            GameObject temp = Instantiate(rangedAttack, this.transform.position, this.transform.rotation);
-            temp.GetComponent<DamageSource>().setOwner(this.gameObject);
+            GameObject temp = projectiles.Dequeue();
+            temp.SetActive(true);
+            temp.transform.rotation = this.transform.rotation;
+            temp.transform.position = this.transform.position;
+            Projectile tempProj = temp.GetComponent<Projectile>();
+            tempProj.moveSpeed = 480f;
+            tempProj.Despawn(rangedCDTime * 0.75f);
+            projectiles.Enqueue(temp);
 
             rangedCD = true;
 

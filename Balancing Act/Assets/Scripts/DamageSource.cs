@@ -58,7 +58,11 @@ public class DamageSource : ElementOverhead
 
                 if (!persistent)
                 {
-                    Destroy(this.gameObject);
+                    if (this is Projectile)
+                    {
+                        this.GetComponent<Projectile>().StopAllCoroutines();
+                        this.GetComponent<Projectile>().Despawn();
+                    }
                 }
             }
         } 
@@ -66,7 +70,11 @@ public class DamageSource : ElementOverhead
         {
             if (!persistent)
             {
-                Destroy(this.gameObject);
+                if (this is Projectile)
+                {
+                    this.GetComponent<Projectile>().StopAllCoroutines();
+                    this.GetComponent<Projectile>().Despawn();
+                }
             }
         }
     }
