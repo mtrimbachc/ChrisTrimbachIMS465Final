@@ -49,6 +49,9 @@ public class Player : Damageable
     [SerializeField] private GameObject[] magic1Attacks = null;
     [SerializeField] private GameObject[] magic2Attacks = null;
 
+    private Queue<GameObject>[] magic1Queues = new Queue<GameObject>[3];
+    private Queue<GameObject>[] magic2Queues = new Queue<GameObject>[3];
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +69,33 @@ public class Player : Damageable
 
         for (int i = 0; i < meleeAttacks.Length; i++)
             meleeAttacks[i].GetComponent<DamageSource>().setOwner(this.gameObject);
+
+        for (int i = 0; i < magic1Attacks.Length; i++)
+        {
+            magic1Queues[i] = new Queue<GameObject>();
+
+            for (int j = 0; j < 3; j++)
+            {
+                DamageSource temp = Instantiate(magic1Attacks[i], this.transform.position, this.transform.rotation).GetComponent<DamageSource>();
+                temp.setOwner(this.gameObject);
+                temp.gameObject.SetActive(false);
+                magic1Queues[i].Enqueue(temp.gameObject);
+            }
+        }
+
+        for (int i = 0; i < magic2Attacks.Length; i++)
+        {
+            magic2Queues[i] = new Queue<GameObject>();
+
+            for (int j = 0; j < 3; j++)
+            {
+                DamageSource temp = Instantiate(magic2Attacks[i], this.transform.position, this.transform.rotation).GetComponent<DamageSource>();
+                temp.setOwner(this.gameObject);
+                temp.gameObject.SetActive(false);
+                magic2Queues[i].Enqueue(temp.gameObject);
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -194,10 +224,17 @@ public class Player : Damageable
 
         if (currentAttack != -1 && magic1Attacks[currentAttack] != null)
         {
-            GameObject temp = Instantiate(magic1Attacks[currentAttack], this.transform.position, innerPlayer.transform.rotation);
-            temp.GetComponent<DamageSource>().setOwner(this.gameObject);
-            temp.GetComponent<DamageSource>().setModifiers(generalDamageMod, lightDamageMod, darkDamageMod);
+            Projectile temp = magic1Queues[currentAttack].Dequeue().GetComponent<Projectile>();
+            temp.gameObject.SetActive(true);
+            temp.setOwner(this.gameObject);
+            temp.setModifiers(generalDamageMod, lightDamageMod, darkDamageMod);
+            temp.gameObject.transform.position = this.transform.position;
+            temp.gameObject.transform.rotation = innerPlayer.transform.rotation;
+            temp.moveSpeed = 540f;
+            temp.Despawn(magic1CDTime * 1.2f);
             magic1CD = true;
+
+            magic1Queues[currentAttack].Enqueue(temp.gameObject);
 
             BuildUpGauge(magic1BuildUp, _selectedElement);
 
