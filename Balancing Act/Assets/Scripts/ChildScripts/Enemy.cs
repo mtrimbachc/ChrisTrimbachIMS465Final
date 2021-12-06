@@ -106,7 +106,7 @@ public class Enemy : Damageable
             temp.transform.position = this.transform.position;
             Projectile tempProj = temp.GetComponent<Projectile>();
             tempProj.moveSpeed = 480f;
-            tempProj.Despawn(rangedCDTime * 0.75f);
+            tempProj.DespawnTime(rangedCDTime * 0.75f);
             projectiles.Enqueue(temp);
 
             rangedCD = true;

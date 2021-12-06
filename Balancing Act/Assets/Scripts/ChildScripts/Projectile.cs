@@ -17,8 +17,15 @@ public class Projectile : DamageSource
         RB.velocity = this.transform.up * moveSpeed * Time.fixedDeltaTime;
     }
 
-    public IEnumerator Despawn(float time)
+    public void DespawnTime(float time)
     {
+        StartCoroutine(Despawn(time));
+    }
+
+    private IEnumerator Despawn(float time)
+    {
+        Debug.Log("Despawning");
+
         yield return new WaitForSeconds(time);
 
         Despawn();
@@ -26,6 +33,9 @@ public class Projectile : DamageSource
 
     public void Despawn()
     {
+        if (this is ExplosiveProjectile)
+            this.GetComponent<ExplosiveProjectile>().CreateAOEField();
+
         if (owner != null)
         {
             moveSpeed = 0f;

@@ -231,7 +231,7 @@ public class Player : Damageable
             temp.gameObject.transform.position = this.transform.position;
             temp.gameObject.transform.rotation = innerPlayer.transform.rotation;
             temp.moveSpeed = 540f;
-            temp.Despawn(magic1CDTime * 1.2f);
+            temp.DespawnTime(magic1CDTime * 1.2f);
             magic1CD = true;
 
             magic1Queues[currentAttack].Enqueue(temp.gameObject);
@@ -273,10 +273,17 @@ public class Player : Damageable
 
         if (currentAttack != -1 && magic2Attacks[currentAttack] != null)
         {
-            GameObject temp = Instantiate(magic2Attacks[currentAttack], this.transform.position, innerPlayer.transform.rotation);
-            temp.GetComponent<DamageSource>().setOwner(this.gameObject);
-            temp.GetComponent<DamageSource>().setModifiers(generalDamageMod, lightDamageMod, darkDamageMod);
+            Projectile temp = magic2Queues[currentAttack].Dequeue().GetComponent<Projectile>();
+            temp.gameObject.SetActive(true);
+            temp.setOwner(this.gameObject);
+            temp.setModifiers(generalDamageMod, lightDamageMod, darkDamageMod);
+            temp.gameObject.transform.position = this.transform.position;
+            temp.gameObject.transform.rotation = innerPlayer.transform.rotation;
+            temp.moveSpeed = 320f;
+            temp.DespawnTime(1f);
             magic2CD = true;
+
+            magic2Queues[currentAttack].Enqueue(temp.gameObject);
 
             BuildUpGauge(magic2BuildUp, _selectedElement);
 
