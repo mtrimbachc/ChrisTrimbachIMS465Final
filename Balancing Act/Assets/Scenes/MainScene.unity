@@ -6163,9 +6163,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Welcome to Balancing Act!\n\nControls \n(Gamepad controls based on XBox
     Controller)\nMove: WASD / Left Joystick\nAim: Mouse Pointer / Right Joystick\nChange
-    Elements: F / Y\nMelee: E / X\nProjectile: Left Click / RB\nAOE Projectile: Right
-    Click / LB\nBuff: Q / RT\nEnter Gray: Spacebar / LT\n(Light and Dark Gauges Must
-    be full)"
+    Elements: F / A\nMelee: E / RB\nProjectile: Left Click / LB\nAOE Projectile:
+    Right Click / RT\nBuff: Q / B\nEnter Gray: Spacebar / LT\n(Light and Dark Gauges
+    Must be full)"
 --- !u!222 &2019748792
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -135,12 +135,13 @@ public class Player : Damageable
         {
             newLook = mainCamera.ScreenToWorldPoint(input);
             newLook.z = this.transform.position.z;
-            newLook = Vector3.Normalize(newLook - this.transform.position);
         }
         else
         {
             newLook = new Vector3(this.transform.position.x + input.x, this.transform.position.y + input.y, this.transform.position.z);
         }
+
+        newLook = Vector3.Normalize(newLook - this.transform.position);
 
         float angle = Mathf.Atan2(newLook.x, newLook.y) % (2 * Mathf.PI);
         angle = angle * -Mathf.Rad2Deg;
@@ -377,7 +378,27 @@ public class Player : Damageable
         if (_selectedElement == Element.Gray)
             return;
 
-        if (value.Get<float>() == 0)
+        // Keyboard and Controller handle buttons differently
+        if (PI.currentControlScheme == "Keyboard&Mouse")
+        {
+            if (value.Get<float>() == 0)
+            {
+                if (_selectedElement == Element.Light)
+                {
+                    _selectedElement = Element.Dark;
+                    indicator.color = darkColor;
+                    return;
+                }
+
+                if (_selectedElement == Element.Dark)
+                {
+                    _selectedElement = Element.Light;
+                    indicator.color = lightColor;
+                    return;
+                }
+            }
+        }
+        else
         {
             if (_selectedElement == Element.Light)
             {
@@ -385,8 +406,7 @@ public class Player : Damageable
                 indicator.color = darkColor;
                 return;
             }
-
-            if (_selectedElement == Element.Dark)
+            else if (_selectedElement == Element.Dark)
             {
                 _selectedElement = Element.Light;
                 indicator.color = lightColor;
