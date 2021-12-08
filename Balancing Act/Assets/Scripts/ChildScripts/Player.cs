@@ -177,6 +177,7 @@ public class Player : Damageable
             meleeAttacks[currentAttack].GetComponent<DamageSource>().setModifiers(generalDamageMod, lightDamageMod, darkDamageMod);
             meleeCD = true;
 
+            UI.EmptyMelee(meleeCDTime);
             BuildUpGauge(meleeBuildUp, _selectedElement);
 
             StartCoroutine(MeleeDespawn(currentAttack));
@@ -235,6 +236,7 @@ public class Player : Damageable
 
             magic1Queues[currentAttack].Enqueue(temp.gameObject);
 
+            UI.EmptyMagic1(magic1CDTime);
             BuildUpGauge(magic1BuildUp, _selectedElement);
 
             StartCoroutine(Magic1CoolDown());
@@ -284,6 +286,7 @@ public class Player : Damageable
 
             magic2Queues[currentAttack].Enqueue(temp.gameObject);
 
+            UI.EmptyMagic2(magic2CDTime);
             BuildUpGauge(magic2BuildUp, _selectedElement);
 
             StartCoroutine(Magic2CoolDown());
@@ -340,7 +343,7 @@ public class Player : Damageable
         }
 
         magic3CD = true;
-
+        UI.EmptyMagic3(magic3CDTime);
         BuildUpGauge(magic3BuildUp, _selectedElement);
 
         StartCoroutine(Magic3CoolDown());
