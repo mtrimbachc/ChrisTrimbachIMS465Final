@@ -3979,7 +3979,7 @@ MonoBehaviour:
 
 
 
-    Press "X" or "Start" to Restart the Game!'
+    Press "X" to Restart the Game!'
 --- !u!222 &1266126661
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6161,11 +6161,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Welcome to Balancing Act!\n\nControls \n(Gamepad controls based on XBox
-    Controller)\nMove: WASD / Left Joystick\nAim: Mouse Pointer / Right Joystick\nChange
-    Elements: F / A\nMelee: E / RB\nProjectile: Left Click / LB\nAOE Projectile:
-    Right Click / RT\nBuff: Q / B\nEnter Gray: Spacebar / LT\n(Light and Dark Gauges
-    Must be full)"
+  m_Text: "Welcome to Balancing Act!\n\nControls \nMove: WASD\nAim: Mouse Pointer\nChange
+    Elements: F\nMelee: E\nProjectile: Left Click\nAOE Projectile: Right Click\nBuff:
+    Q\nEnter Gray: Spacebarff\n(Light and Dark Gauges Must be full)"
 --- !u!222 &2019748792
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6277,9 +6275,6 @@ MonoBehaviour:
   _team: 0
   _resistance: 0
   health: 100
-  generalDamageMod: 1
-  lightDamageMod: 1
-  darkDamageMod: 1
   healthMax: 100
   moveSpeed: 500
   darkBuffAmount: 0.25
