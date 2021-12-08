@@ -24,7 +24,7 @@ public class Projectile : DamageSource
 
     private IEnumerator Despawn(float time)
     {
-        Debug.Log("Despawning");
+        //Debug.Log("Despawning");
 
         yield return new WaitForSeconds(time);
 

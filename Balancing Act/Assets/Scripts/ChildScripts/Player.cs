@@ -22,15 +22,14 @@ public class Player : Damageable
     private bool magic1CD = false;
     private bool magic2CD = false;
     private bool magic3CD = false;
-    private bool unbalanced = false;
     private bool darkBuff = false;
     private bool grayBuff = false;
     private int lightBuildUp = 0;
     private int darkBuildUp = 0;
     private int grayBuildUp = 0;
-    [SerializeField] private float generalDamageMod = 1f;
-    [SerializeField] private float lightDamageMod = 1f;
-    [SerializeField] private float darkDamageMod = 1f;
+    private float generalDamageMod = 1f;
+    private float lightDamageMod = 1f;
+    private float darkDamageMod = 1f;
 
     [SerializeField] private float healthMax = 100;
     [SerializeField] private float moveSpeed = 8f;
