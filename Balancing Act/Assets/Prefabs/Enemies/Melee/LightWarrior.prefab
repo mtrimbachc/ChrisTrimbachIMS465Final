@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7427060856113975725}
   m_Layer: 0
   m_Name: LightWarrior
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _team: 1
   _resistance: 0
-  health: 100
+  health: 50
+  moveSpeed: 300
   followDistance: 20
   approachDistance: 1.5
   mobile: 1
@@ -256,6 +257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   _element: 0
+  _team: 0
   persistent: 1
 --- !u!61 &7427060856466805410
 BoxCollider2D:

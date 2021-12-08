@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3123826906570216456}
   m_Layer: 0
   m_Name: LightMage
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _team: 1
   _resistance: 0
-  health: 100
+  health: 25
+  moveSpeed: 240
   followDistance: 20
   approachDistance: 10
   mobile: 1

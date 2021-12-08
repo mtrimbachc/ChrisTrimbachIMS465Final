@@ -7,7 +7,7 @@ public class Enemy : Damageable
     private Rigidbody2D RB = null;
     private Player player = null;
 
-    protected float moveSpeed = 160f;
+    [SerializeField] protected float moveSpeed = 160f;
     [SerializeField] protected float followDistance = 30f;
     [SerializeField] protected float approachDistance = 2f;
     protected float distanceToPlayer = float.MaxValue;
@@ -41,7 +41,7 @@ public class Enemy : Damageable
         {
             projectiles = new Queue<GameObject>();
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 GameObject temp = Instantiate(rangedAttack, transform.position, transform.rotation);
                 temp.GetComponent<DamageSource>().setOwner(this.gameObject);
@@ -106,7 +106,7 @@ public class Enemy : Damageable
             temp.transform.position = this.transform.position;
             Projectile tempProj = temp.GetComponent<Projectile>();
             tempProj.moveSpeed = 480f;
-            tempProj.DespawnTime(rangedCDTime * 0.75f);
+            tempProj.DespawnTime(rangedCDTime * 1.35f);
             projectiles.Enqueue(temp);
 
             rangedCD = true;
