@@ -11,6 +11,7 @@ public class Player : Damageable
     private Rigidbody2D RB = null;
     private PlayerInput PI = null;
     private UIManager UI = null;
+    private GameManager GM = null;
     private Camera mainCamera = null;
 
     private float horizontal = 0;
@@ -67,6 +68,7 @@ public class Player : Damageable
         RB = this.GetComponent<Rigidbody2D>();
         PI = this.GetComponent<PlayerInput>();
         UI = GameObject.Find("Canvas").GetComponent<UIManager>();
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         mainCamera = this.GetComponentInChildren<Camera>();
 
         RB.freezeRotation = true;
@@ -496,6 +498,6 @@ public class Player : Damageable
     {
         // Double check health to make sure the call is valid
         if (health <= 0)
-            Debug.Log("The Player has died");
+            GM.Restart();
     }
 }
