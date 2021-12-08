@@ -1991,7 +1991,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.99215686, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4119,7 +4119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090776641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -12.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 297298671}
@@ -4190,7 +4190,7 @@ MonoBehaviour:
   magic2BuildUp: 15
   magic3BuildUp: 25
   innerPlayer: {fileID: 297298670}
-  cursor: {fileID: 637860932}
+  indicator: {fileID: 876934875}
   meleeAttacks:
   - {fileID: 1344953216}
   - {fileID: 1972929982}
@@ -4203,6 +4203,9 @@ MonoBehaviour:
   - {fileID: 62459884082497021, guid: ed92b79f8a8a19e44b388a6f87de4ace, type: 3}
   - {fileID: 2677350108513550887, guid: 05a4021e1451d7342a110fce2fa1f027, type: 3}
   - {fileID: 5667772782233890182, guid: 38059270b998ba545ae1a3daec006de6, type: 3}
+  lightColor: {r: 0.99215686, g: 1, b: 0, a: 1}
+  darkColor: {r: 0.59607846, g: 0, b: 1, a: 1}
+  grayColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
 --- !u!58 &2090776646
 CircleCollider2D:
   m_ObjectHideFlags: 0

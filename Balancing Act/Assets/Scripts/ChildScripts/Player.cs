@@ -44,10 +44,14 @@ public class Player : Damageable
     [SerializeField] private int magic2BuildUp = 15;
     [SerializeField] private int magic3BuildUp = 10;
     [SerializeField] private GameObject innerPlayer = null;
-    [SerializeField] private GameObject cursor = null;
+    [SerializeField] private SpriteRenderer indicator = null;
     [SerializeField] private GameObject[] meleeAttacks = null;
     [SerializeField] private GameObject[] magic1Attacks = null;
     [SerializeField] private GameObject[] magic2Attacks = null;
+
+    [SerializeField] private Color lightColor = Color.yellow;
+    [SerializeField] private Color darkColor = Color.black;
+    [SerializeField] private Color grayColor = Color.gray;
 
     private Queue<GameObject>[] magic1Queues = new Queue<GameObject>[3];
     private Queue<GameObject>[] magic2Queues = new Queue<GameObject>[3];
@@ -98,12 +102,6 @@ public class Player : Damageable
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         Movement();
@@ -138,8 +136,6 @@ public class Player : Damageable
         }
         else
         {
-            cursor.SetActive(false);
-
             newLook = new Vector3(this.transform.position.x + input.x, this.transform.position.y + input.y, this.transform.position.z);
         }
 
@@ -380,12 +376,14 @@ public class Player : Damageable
             if (_selectedElement == Element.Light)
             {
                 _selectedElement = Element.Dark;
+                indicator.color = darkColor;
                 return;
             }
 
             if (_selectedElement == Element.Dark)
             {
                 _selectedElement = Element.Light;
+                indicator.color = lightColor;
                 return;
             }
         }
@@ -398,6 +396,7 @@ public class Player : Damageable
 
         _selectedElement = Element.Gray;
         _unbalanced = Element.Gray;
+        indicator.color = grayColor;
 
         lightBuildUp = 0;
         darkBuildUp = 0;
@@ -478,6 +477,7 @@ public class Player : Damageable
                     grayBuildUp = 0;
 
                     _selectedElement = Element.Light;
+                    indicator.color = lightColor;
                 }
 
                 UI.UpdateGauges(grayBuildUp, element);
