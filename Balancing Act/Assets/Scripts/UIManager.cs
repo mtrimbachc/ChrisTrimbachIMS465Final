@@ -8,12 +8,7 @@ public class UIManager : ElementOverhead
     [SerializeField] private Image[] elementGauges;
     [SerializeField] private Image[] unbalancedGauges;
     [SerializeField] private Image healthGauge;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Text EndingText;
 
     public void UpdateGauges(int value, Element element)
     {
@@ -69,5 +64,10 @@ public class UIManager : ElementOverhead
     public void UpdateHealth(float current, float max)
     {
         healthGauge.fillAmount = current / max;
+    }
+
+    public void DisplayEndingText()
+    {
+        EndingText.gameObject.SetActive(true);
     }
 }

@@ -38,7 +38,7 @@ public class Projectile : DamageSource
 
         if (owner != null)
         {
-            moveSpeed = 0f;
+            //moveSpeed = 0f;
             RB.velocity = Vector2.zero;
             this.transform.position = owner.transform.position;
             this.gameObject.SetActive(false);

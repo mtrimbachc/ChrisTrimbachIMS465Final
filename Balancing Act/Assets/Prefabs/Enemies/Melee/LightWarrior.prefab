@@ -103,10 +103,11 @@ MonoBehaviour:
   _resistance: 0
   health: 50
   boss: 0
-  moveSpeed: 300
+  moveSpeed: 350
   followDistance: 20
   approachDistance: 1.5
   mobile: 1
+  rotatable: 1
   meleeTime: 0.2
   meleeCDTime: 1
   rangedCDTime: 1

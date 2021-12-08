@@ -229,7 +229,7 @@ public class Player : Damageable
             temp.setModifiers(generalDamageMod, lightDamageMod, darkDamageMod);
             temp.gameObject.transform.position = this.transform.position;
             temp.gameObject.transform.rotation = innerPlayer.transform.rotation;
-            temp.moveSpeed = 540f;
+            //temp.moveSpeed = 540f;
             temp.DespawnTime(magic1CDTime * 1.2f);
             magic1CD = true;
 
@@ -278,7 +278,7 @@ public class Player : Damageable
             temp.setModifiers(generalDamageMod, lightDamageMod, darkDamageMod);
             temp.gameObject.transform.position = this.transform.position;
             temp.gameObject.transform.rotation = innerPlayer.transform.rotation;
-            temp.moveSpeed = 320f;
+            //temp.moveSpeed = 320f;
             temp.DespawnTime(1f);
             magic2CD = true;
 

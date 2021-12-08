@@ -102,7 +102,7 @@ MonoBehaviour:
   _element: 0
   _team: 1
   persistent: 0
-  moveSpeed: 720
+  moveSpeed: 1250
 --- !u!58 &6482351933077127034
 CircleCollider2D:
   m_ObjectHideFlags: 0

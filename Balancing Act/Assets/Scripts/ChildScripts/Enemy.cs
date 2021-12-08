@@ -108,10 +108,15 @@ public class Enemy : Damageable
 
             GameObject temp = projectiles.Dequeue();
             temp.SetActive(true);
-            temp.transform.rotation = this.transform.rotation;
+
+            if (this is BossPart)
+                temp.transform.rotation = this.GetComponent<BossPart>().overallEnemy.transform.rotation;
+            else
+                temp.transform.rotation = this.transform.rotation;
+
             temp.transform.position = this.transform.position;
             Projectile tempProj = temp.GetComponent<Projectile>();
-            tempProj.moveSpeed = 480f;
+            //tempProj.moveSpeed = 480f;
             tempProj.DespawnTime(rangedCDTime * 1.35f);
             projectiles.Enqueue(temp);
 
@@ -150,7 +155,10 @@ public class Enemy : Damageable
         {
             // Check to see if it was the boss that the player killed
             if (boss)
+            {
                 player.Victorious();
+                GameObject.Find("Canvas").GetComponent<UIManager>().DisplayEndingText();
+            }
 
             Destroy(this.gameObject);
         }
