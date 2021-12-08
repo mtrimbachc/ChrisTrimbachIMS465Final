@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class Enemy : Damageable
 {
-    private Rigidbody2D RB = null;
-    private Player player = null;
+    protected Rigidbody2D RB = null;
+    protected Player player = null;
+
+    [SerializeField] private bool boss = false;
 
     [SerializeField] protected float moveSpeed = 160f;
     [SerializeField] protected float followDistance = 30f;
     [SerializeField] protected float approachDistance = 2f;
     protected float distanceToPlayer = float.MaxValue;
     [SerializeField] protected bool mobile = true;
+    [SerializeField] protected bool rotatable = true;
     protected bool meleeCD = false;
     protected bool rangedCD = false;
     [SerializeField] protected float meleeTime = 0.2f;
     [SerializeField] protected float meleeCDTime = 1f;
     [SerializeField] protected float rangedCDTime = 1f;
 
-    private Vector3 playerV = new Vector3();
-    [SerializeField] private GameObject meleeAttack = null;
-    [SerializeField] private GameObject rangedAttack = null;
+    protected Vector3 playerV = new Vector3();
+    [SerializeField] protected GameObject meleeAttack = null;
+    [SerializeField] protected GameObject rangedAttack = null;
 
-    private Queue<GameObject> projectiles = null;
+    protected Queue<GameObject> projectiles = null;
 
 
     // Start is called before the first frame update
@@ -72,10 +75,13 @@ public class Enemy : Damageable
             RB.velocity = new Vector2();
         }
 
-        float angle = Mathf.Atan2(playerV.normalized.x, playerV.normalized.y) % (2 * Mathf.PI);
-        angle = angle * -Mathf.Rad2Deg;
+        if (rotatable)
+        {
+            float angle = Mathf.Atan2(playerV.normalized.x, playerV.normalized.y) % (2 * Mathf.PI);
+            angle = angle * -Mathf.Rad2Deg;
 
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        }
     }
 
     protected void Attack()
@@ -141,6 +147,12 @@ public class Enemy : Damageable
     {
         // double check health to make sure the call is valid
         if (health <= 0)
+        {
+            // Check to see if it was the boss that the player killed
+            if (boss)
+                player.Victorious();
+
             Destroy(this.gameObject);
+        }
     }
 }

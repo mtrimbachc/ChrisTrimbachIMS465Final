@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   _element: 1
-  _team: 0
+  _team: 1
   persistent: 1
 --- !u!61 &2761704454792837577
 BoxCollider2D:
@@ -229,6 +229,7 @@ MonoBehaviour:
   _team: 1
   _resistance: 1
   health: 50
+  boss: 0
   moveSpeed: 300
   followDistance: 20
   approachDistance: 1.5

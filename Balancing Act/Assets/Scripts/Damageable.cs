@@ -20,8 +20,12 @@ public class Damageable : ElementOverhead
             //Debug.Log("Resisted");
         }
 
-        health -= damage;
-        //Debug.Log(health);
+        if (this is BossPart)
+        {
+            this.GetComponent<BossPart>().overallEnemy.TakeDamage(damage, Element.Gray);
+        }
+        else
+            health -= damage;
 
         if (this is Player)
             this.GetComponent<Player>().UpdateHealth();

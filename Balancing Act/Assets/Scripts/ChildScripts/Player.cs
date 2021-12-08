@@ -17,6 +17,7 @@ public class Player : Damageable
     private float horizontal = 0;
     private float vertical = 0;
 
+    private bool won = false;
     private bool meleeCD = false;
     private bool magic1CD = false;
     private bool magic2CD = false;
@@ -492,6 +493,17 @@ public class Player : Damageable
     public void UpdateHealth()
     {
         UI.UpdateHealth(health, healthMax);
+    }
+
+    public void OnRestart()
+    {
+        if (won)
+            GM.Restart();
+    }
+
+    public void Victorious()
+    {
+        won = true;
     }
 
     public void OnDeath()
